@@ -8,7 +8,7 @@
     <h1>Effectuer une Transaction Mobile Money</h1>
 
     <label for="transactionType">Type de transaction :</label>
-    <select id="transactionType">
+    <select id="transactionType" onchange="afficherChamps()">
       <option value="collection">📦 Collection (Recevoir)</option>
       <option value="disbursement">💸 Disbursement (Envoyer)</option>
       <option value="remittance">🌍 Remittance (International)</option>
@@ -23,17 +23,30 @@
     <input type="text" id="recepteur" placeholder="Ex: 256774290782" />
     <br /><br />
 
-    <label for="amount">Montant (optionnel) :</label>
-    <input type="text" id="amount" placeholder="Ex: 2000" />
-    <br /><br />
+    <div id="montantSection" style="display:none;">
+      <label for="amount">Montant (optionnel) :</label>
+      <input type="text" id="amount" placeholder="Ex: 2000" />
+      <br /><br />
 
-    <label for="currency">Devise (optionnel) :</label>
-    <input type="text" id="currency" placeholder="Ex: EUR" />
-    <br /><br />
+      <label for="currency">Devise (optionnel) :</label>
+      <input type="text" id="currency" placeholder="Ex: EUR" />
+      <br /><br />
+    </div>
 
     <button onclick="lancerTransaction()">Lancer la transaction</button>
 
     <script>
+      function afficherChamps() {
+        const type = document.getElementById("transactionType").value;
+        const montantSection = document.getElementById("montantSection");
+        
+        if (type === "disbursement" || type === "remittance") {
+          montantSection.style.display = "block";
+        } else {
+          montantSection.style.display = "none";
+        }
+      }
+
       function lancerTransaction() {
         const type = document.getElementById("transactionType").value;
         const expediteur = document.getElementById("expediteur").value;
@@ -81,6 +94,9 @@
             alert("Erreur durant la transaction");
           });
       }
+
+      // Initialiser les champs visibles en fonction de la sélection par défaut
+      afficherChamps();
     </script>
   </body>
 </html>

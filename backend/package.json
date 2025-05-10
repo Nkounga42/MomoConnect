@@ -7,9 +7,10 @@
     "express": "^5.1.0",
     "node-fetch": "^3.3.2"
   },
-  "name": "test-b",
+  "name": "MomoConnect",
+  "autohor": "Nkounga exauce",
   "version": "1.0.0",
-  "description": "",
+  "description": "**MomoConnect** — L’app simple et rapide pour envoyer, recevoir et gérer vos transactions Mobile Money en toute sécurité.",
   "main": "testMomoApi.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
