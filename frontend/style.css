@@ -1,0 +1,166 @@
+:root {
+  --primary: #2c3e50;
+  --secondary: #1abc9c;
+  --accent: #16a085;
+  --light: #f9f9f9;
+  --dark: #333;
+  --border: #e1e1e1;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h1,
+h2 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--secondary);
+}
+
+.card { 
+  margin-bottom: 2rem; 
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+select,
+input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.2);
+}
+
+.btn {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.transaction-icon {
+  font-size: 1.2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem; 
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: var(--primary);
+  color: white;
+}
+
+tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+tr:hover {
+  background: rgba(26, 188, 156, 0.05);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status-success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.hidden {
+  display: none;
+}
+
+.currency-selector {
+  display: flex;
+  gap: 1rem;
+}
+
+.currency-selector select {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .currency-selector {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

@@ -1,102 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+<head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Momo API</title>
-  </head>
-  <body>
-    <h1>Effectuer une Transaction Mobile Money</h1>
+    <link rel="stylesheet" href="style.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Effectuer une Transaction Mobile Money</h1>
+        
+        <div class="card">
+            <div class="form-group">
+                <label for="transactionType">Type de transaction :</label>
+                <select id="transactionType" onchange="afficherChamps()">
+                    <option value="collection">📦 Collection (Recevoir)</option>
+                    <option value="disbursement">💸 Disbursement (Envoyer)</option>
+                    <option value="remittance">🌍 Remittance (International)</option>
+                </select>
+            </div>
+            
+            <div id="expediteur-container" class="form-group">
+                <label for="expediteur">Numéro Expéditeur :</label>
+                <input type="text" id="expediteur" placeholder="Ex: 256774290781" />
+            </div>
 
-    <label for="transactionType">Type de transaction :</label>
-    <select id="transactionType" onchange="afficherChamps()">
-      <option value="collection">📦 Collection (Recevoir)</option>
-      <option value="disbursement">💸 Disbursement (Envoyer)</option>
-      <option value="remittance">🌍 Remittance (International)</option>
-    </select>
-    <br /><br />
+            <div class="form-group">
+                <label for="recepteur">Numéro Récepteur :</label>
+                <input type="text" id="recepteur" placeholder="Ex: 256774290782" />
+            </div>
 
-    <label for="expediteur">Numéro Expéditeur :</label>
-    <input type="text" id="expediteur" placeholder="Ex: 256774290781" />
-    <br /><br />
+            <div id="montantSection" class="form-group hidden">
+                <label for="amount">Montant :</label>
+                <div class="currency-selector">
+                    <input type="number" id="amount" placeholder="Ex: 2000" />
+                    <select id="currency" hidden>
+                        <option value="XAF">XAF (Franc CFA)</option>
+                        <option value="XOF">XOF (Franc CFA Ouest)</option>
+                        <option value="USD">USD (Dollar US)</option>
+                        <option value="EUR">EUR (Euro)</option>
+                    </select>
+                </div>
+            </div>
 
-    <label for="recepteur">Numéro Récepteur :</label>
-    <input type="text" id="recepteur" placeholder="Ex: 256774290782" />
-    <br /><br />
+            <button class="btn" onclick="lancerTransaction()">
+                <span class="transaction-icon">💳</span> Lancer la transaction
+            </button>
+        </div>
 
-    <div id="montantSection" style="display:none;">
-      <label for="amount">Montant (optionnel) :</label>
-      <input type="text" id="amount" placeholder="Ex: 2000" />
-      <br /><br />
-
-      <label for="currency">Devise (optionnel) :</label>
-      <input type="text" id="currency" placeholder="Ex: EUR" />
-      <br /><br />
+        <h2>Historique des Transactions</h2>
+        <div class="card">
+            <table id="historique">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Expéditeur</th>
+                        <th>Récepteur</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                        <th>Heure</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Historique des transactions -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <button onclick="lancerTransaction()">Lancer la transaction</button>
-
-    <script>
-      function afficherChamps() {
-        const type = document.getElementById("transactionType").value;
-        const montantSection = document.getElementById("montantSection");
-        
-        if (type === "disbursement" || type === "remittance") {
-          montantSection.style.display = "block";
-        } else {
-          montantSection.style.display = "none";
-        }
-      }
-
-      function lancerTransaction() {
-        const type = document.getElementById("transactionType").value;
-        const expediteur = document.getElementById("expediteur").value;
-        const recepteur = document.getElementById("recepteur").value;
-        const amount = document.getElementById("amount").value;
-        const currency = document.getElementById("currency").value;
-
-        if (!expediteur || !recepteur) {
-          alert("🚨 Veuillez remplir les numéros expéditeur et récepteur !");
-          return;
-        }
-
-        let endpoint = "";
-        let payload = {
-          numeroExpediteur: expediteur,
-          numeroRecepteur: recepteur,
-        };
-
-        if (type === "collection") {
-          endpoint = "collection";
-        } else if (type === "disbursement" || type === "remittance") {
-          if (!amount || !currency) {
-            alert("🚨 Veuillez renseigner le montant et la devise !");
-            return;
-          }
-          endpoint = type;
-          payload.amount = amount;
-          payload.currency = currency;
-        }
-
-        fetch(`http://localhost:3000/${endpoint}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("✅ Réponse du serveur:", data);
-            alert(data.message || "Transaction réussie !");
-          })
-          .catch((error) => {
-            console.error("❌ Erreur:", error);
-            alert("Erreur durant la transaction");
-          });
-      }
-
-      // Initialiser les champs visibles en fonction de la sélection par défaut
-      afficherChamps();
-    </script>
-  </body>
+   
+</body>
 </html>
