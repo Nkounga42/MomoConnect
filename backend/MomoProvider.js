@@ -1,10 +1,10 @@
 const axios = require("axios");
 const Buffer = require("buffer").Buffer;
 
-const Collection_Widget_API = "4e40e72de6994a9a903dfd146107fd12"; // Clé Collection Widget
-const Collections_API = "75c611fd933e4f3f8c587d652f0d3ebf"; // Clé Collection
-const Disbursements_API = "e56ec3d104d54a8ebc2248d8e7e6d286"; // Clé Disbursement
-const Remittance_API = "c0282da2b91c4384b15518c8cf78c501"; // Clé Remittance
+const Collection_Widget_API = ""; // Clé Collection Widget
+const Collections_API = ""; // Clé Collection
+const Disbursements_API = ""; // Clé Disbursement
+const Remittance_API = ""; // Clé Remittance
 const Environment = "sandbox"; // Environnement de test
 
 class MomoApi {
