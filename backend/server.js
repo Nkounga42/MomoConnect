@@ -34,7 +34,7 @@ app.post("/collection", async (req, res) => {
     await momoApi.requestToPay(accessToken);
     res.json({ 
       message: "✅ Paiement demandé avec succès",
-      data: { numeroExpediteur, numeroRecepteur },
+      data: { numeroExpediteur, numeroRecepteur  },
 
     });
   } catch (error) {
